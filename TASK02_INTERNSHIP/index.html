@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple webpage</title>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+    <header>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+      
+    </header>
+    <main>
+        <section id="colorSection">
+            <h1>Welcome to our website</h1>
+            <p>This is the main content section. </p>
+        </section>
+        <button id="colorButton">change colour</button>
+      
+        <h2>Contact Form</h2>
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea><br>
+
+            <button type="submit">Submit</button>
+        </form>
+        <div id="formError" class="error"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const colorButton = document.getElementById('colorButton');
+    const colorSection = document.getElementById('colorSection');
+    const contactForm = document.getElementById('contactForm');
+    const formError = document.getElementById('formError');
+
+ 
+    colorButton.addEventListener('click', function() {
+        colorSection.style.backgroundColor = getRandomColor();
+    });
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Form validation
+    contactForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        formError.textContent = '';
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        if (name === '' || email === '' || message === '') {
+            formError.textContent = 'All fields are required.';
+        } else {
+            formError.textContent = 'Form submitted successfully!';
+            contactForm.reset();
+        }
+    });
+});
+
+    </script>
+</body>
+</html>
